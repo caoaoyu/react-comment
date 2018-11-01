@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.uglify/
+
+*.json
+
+.DS_Store
+yarn.lock
+yarn-error.log

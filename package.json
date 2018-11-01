@@ -10,6 +10,8 @@
   "author": "zhouxingxing",
   "license": "ISC",
   "devDependencies": {
+    "lodash": ">=4.17.5",
+    "url-parse": ">=1.4.3",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
@@ -28,6 +30,7 @@
     "react-redux": "^5.1.0",
     "redux": "^4.0.1",
     "style-loader": "^0.23.1",
-    "transform-runtime": "^0.0.0"
+    "transform-runtime": "^0.0.0",
+    "randomatic": ">=3.0.0"
   }
 }
