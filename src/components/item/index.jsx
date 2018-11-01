@@ -1,9 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export default class Item extends React.Component{
-	render() {
-		return (
-			<p>item</p>
-		);
-	}
+const Item =({ data }) => {
+	return (
+		<p className="show_comment">{data.text}</p>
+	);
 }
+
+Item.prototype = ({
+	data: PropTypes.object.isRequired,
+})
+
+export default Item

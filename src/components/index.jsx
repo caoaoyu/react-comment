@@ -1,35 +1,35 @@
 import React from 'react';
-import List from '../components/list/index';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import './index.css';
-import store from '../store';
-import { ADD_COMMENT, FIND_COMMENT, CHANGE_COMMENT, DELTEL_COMMENT } from '../actions';
+import { get_model_array } from './model';
+import { get_comment } from '../actions';
+import AddComment from '../container/addComments';
+import VisibleComments from '../container/visibleComments';
 
-
-export default class App extends React.Component{
-	constructor(props){
+class App extends React.Component {
+	constructor(props) {
 		super(props);
-		this.state = {
-			comments: [],
-		}
 	}
 
 	componentDidMount() {
-		var list = localStorage.getItem('comments');
-		if(list) {this.setState({comments: JSON.parse(list)})};
+		const array = get_model_array();
+		if(array.length > 0) this.props.dispatch(get_comment(array))
 	}
 
 	render() {
-		const add_click= () => {
-			console.log('add',this.props)
-			store.dispatch({ type: 'ADD_COMMENT', payload: {text: 'text add', value: 1}});
-			console.log(store.getState(), this.state)
-		}
 		return (
-			<div className="container" >
-				<div className="entry" contentEditable="true" />
-				<button className="add_comments" type="defult" onClick={add_click} >留言</button>
-				<List comments={this.state.comments}/>
+			<div className="container">
+				<AddComment />
+				<VisibleComments />
 			</div>
 		);
 	}
 }
+
+App.propTypes = ({
+	dispatch: PropTypes.func.isRequired,
+})
+
+export default connect()(App)
+

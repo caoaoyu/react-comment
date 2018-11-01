@@ -1,17 +1,21 @@
 import React from 'react';
 import Item from '../item/index';
 import None from '../general/none/index';
+import PropTypes from 'prop-types';
 
-export default class List extends React.Component{
-	constructor(props) {
-		super(props);
-	}
-	render() {
-		const { comments } = this.props;
-		return (
-			<div className="comment_list">
-				{comments.length > 0 ? <Item /> : <None />}
-			</div>
-		);
-	}
+const h_list = (array) => {
+	return array.map((e,i) => {
+		console.log(e)
+		return <Item key={`comment-${i}`} data={e}/>
+	})
 }
+const List = ({ comments }) => {
+	console.log(comments)
+	return <div className="comment_list">{comments.length > 0 ? h_list(comments) : <None />}</div>;
+};
+
+List.propTypes = {
+	comments: PropTypes.array.isRequired
+};
+
+export default List;
