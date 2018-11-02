@@ -2,28 +2,25 @@ import * as actions from '../actions';
 import { connect } from 'react-redux';
 import List from '../components/list/index';
 
-const get_comments = (list, filter) => {
-	switch (filter) {
-		case 'SHOW_Find':
-			return list;
-		case 'SHOW_ALL':
-			return list;
-		default:
-			return list;
-	}
-};
+const { add_comment, deltel_comment, find_comment } = actions
 
 const mapStateToProps = (state) => {
 	return {
-		comments: state.comments,
+		comments: state.comments
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
 	return {
 		on_add_click: (payload) => {
-			dispatch(actions.add_comment(payload));
-		}
+			dispatch(add_comment(payload));
+		},
+		on_find: (payload) => {
+			dispatch(find_comment(payload));
+		},
+		on_deltel: (payload) => {
+			dispatch(deltel_comment(payload));
+		},
 	};
 };
 

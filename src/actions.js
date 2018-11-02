@@ -3,11 +3,9 @@ export const FIND_COMMENT = 'FIND_COMMENT';
 export const CHANGE_COMMENT = 'CHANGE_COMMENT';
 export const DELTEL_COMMENT = 'DELTEL_COMMENT';
 export const GET_COMMENT = 'GET_COMMENT';
-
-export const VisibilityFilters = {
-	SHOW_ALL: 'SHOW_ALL',
-	SHOW_Find: 'SHOW_Find'
-};
+export const SHOW_ALL = 'SHOW_ALL';
+export const SHOW_Find = 'SHOW_Find';
+export const SHOW_DELETEL = 'SHOW_DELETEL';
 
 export const get_comment = (payload) => {
 	return {

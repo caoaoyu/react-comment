@@ -19,6 +19,19 @@ const comments_reducer = (state, action) => {
 	}
 };
 
+// const visible_comments = (list, filter) => {
+// 	switch (filter) {
+// 		case 'SHOW_Find':
+// 			return list.filter((e) => e.id !== filter.id);
+// 		case 'SHOW_DELETEL':
+// 			return list.filter((e) => !e.deltel);
+// 		case 'SHOW_ALL':
+// 			return list;
+// 		default:
+// 			return list;
+// 	}
+// };
+
 const get = (state, payload) => {
 	state.comments = payload;
 	console.log('GET_COMMENT', state, payload);
