@@ -1,6 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import './index.css';
 import { get_model_array } from './model';
 import { get_comment } from '../actions';

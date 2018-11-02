@@ -8,7 +8,6 @@ const h_list = (array) => {
 	return array.map((e,i) => <Item key={`comment-${i}`} data={e}/>)
 }
 const List = ({ comments }) => {
-	console.log(comments)
 	return <div className="comment_list">{comments.length > 0 ? h_list(comments) : <None />}</div>;
 };
 

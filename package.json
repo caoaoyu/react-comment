@@ -24,6 +24,7 @@
     "webpack-dev-server": "^2.9.4"
   },
   "dependencies": {
+    "classnames": "^2.2.6",
     "css-loader": "^1.0.1",
     "fast-uglifyjs-plugin": "^0.3.0",
     "prop-types": "^15.6.2",
