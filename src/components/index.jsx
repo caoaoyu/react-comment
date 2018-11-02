@@ -13,8 +13,8 @@ class App extends React.Component {
 	}
 
 	componentDidMount() {
-		const array = get_model_array();
-		if(array.length > 0) this.props.dispatch(get_comment(array))
+		const data = get_model_array(this.props.one_max);
+		if(data.comments.length > 0) this.props.dispatch(get_comment(data))
 	}
 
 	render() {
@@ -27,9 +27,16 @@ class App extends React.Component {
 	}
 }
 
+const mapStateToProps = (state) => {
+	return{
+		one_max: state.one_max,
+	}
+};
+
 App.propTypes = ({
 	dispatch: PropTypes.func.isRequired,
+	one_max: PropTypes.number,
 })
 
-export default connect()(App)
+export default connect(mapStateToProps)(App)
 

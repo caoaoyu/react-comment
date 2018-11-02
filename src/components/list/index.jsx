@@ -5,14 +5,14 @@ import PropTypes from 'prop-types';
 import './index.css';
 
 const h_list = (array, func) => {
-	return array.map((e,i) => <Item key={`comment-${i}`} data={e} comments={array} handle_delete={func}/>)
+	return array.map((e,i) => <Item key={`comment-${i}`} data={e} page_comment={array} handle_delete={func}/>)
 }
-const List = ({ comments, on_deltel }) => {
-	return <div className="comment_list">{comments.length > 0 ? h_list(comments, on_deltel) : <None />}</div>;
+const List = ({ page_comment, on_deltel }) => {
+	return <div className="comment_list">{page_comment.length > 0 ? h_list(page_comment, on_deltel) : <None />}</div>;
 };
 
 List.propTypes = {
-	comments: PropTypes.array.isRequired,
+	page_comment: PropTypes.array.isRequired,
 	on_deltel: PropTypes.func.isRequired,
 };
 

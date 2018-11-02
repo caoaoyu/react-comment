@@ -10,7 +10,7 @@ class AddComment extends React.Component {
 		this.state = {
 			vul: '',
 			exceed: false,
-			max: 10
+			max: 60
 		};
 
 		this.add_comment = this.add_comment.bind(this);
@@ -21,6 +21,7 @@ class AddComment extends React.Component {
 	add_comment(param) {
 		if (this.state.vul.length > 0) {
 			const comments = add_model(this.props.ids, this.state.vul);
+			console.log(comments)
 			this.props.on_add_click({ comments });
 			this.setState({
 				vul: '',

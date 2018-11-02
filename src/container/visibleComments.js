@@ -6,7 +6,7 @@ const { add_comment, deltel_comment, find_comment } = actions
 
 const mapStateToProps = (state) => {
 	return {
-		comments: state.comments
+		page_comment: state.page_comment
 	};
 };
 

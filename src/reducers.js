@@ -1,8 +1,7 @@
 // import { combineReducers } from 'redux'
 
 const comments_reducer = (state, action) => {
-	state = state || { comments: [] };
-	console.log('comments_reducer', state, 'action', action);
+	state = state || { comments: [], pages_nums: false, page_comment: [], one_max: 7 };
 	switch (action.type) {
 		case 'ADD_COMMENT':
 			return add(state, action.payload);
@@ -33,9 +32,9 @@ const comments_reducer = (state, action) => {
 // };
 
 const get = (state, payload) => {
-	state.comments = payload;
+	// state.comments = payload.comments;
 	console.log('GET_COMMENT', state, payload);
-	return { ...state};
+	return { ...payload};
 };
 
 const add = (state, payload) => {

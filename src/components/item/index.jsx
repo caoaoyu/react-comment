@@ -23,17 +23,19 @@ class Item extends React.Component {
 	}
 
 	handle_hide() {
+		console.log('handle_hide')
 		this.setState({ show_modal: false });
 	}
 
 	handle_stroge(array, id) {
 		let data = operction_del(array, id);
+		this.handle_hide();
 		this.props.handle_delete(data);
 		return;
 	}
 
 	render() {
-		const { comments, data, handle_delete } = this.props;
+		const { page_comment, data, handle_delete } = this.props;
 		return (
 			<div className={cs({"show_comment": true, 'show_comment_delete': data.delete})}>
 				<p>{data.text}</p>
@@ -49,7 +51,7 @@ class Item extends React.Component {
 				{this.state.show_modal ? (
 					<Modal
 						handle_hide={this.handle_hide}
-						handle_delete={() => this.handle_stroge(comments, data.id)}
+						handle_delete={() => this.handle_stroge(page_comment, data.id)}
 						context="确定删除吗"
 					/>
 				) : null}
@@ -59,7 +61,7 @@ class Item extends React.Component {
 }
 
 Item.prototypes = {
-	comments: PropTypes.array.isRequired,
+	page_comment: PropTypes.array.isRequired,
 	data: PropTypes.object.isRequired,
 	handle_delete: PropTypes.func.isRequired
 };
