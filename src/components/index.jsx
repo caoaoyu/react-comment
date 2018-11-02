@@ -6,6 +6,7 @@ import { get_model_array } from './model';
 import { get_comment } from '../actions';
 import AddComment from '../container/addComments';
 import VisibleComments from '../container/visibleComments';
+import SettingPages from '../container/settingPages';
 
 class App extends React.Component {
 	constructor(props) {
@@ -22,6 +23,7 @@ class App extends React.Component {
 			<div className="container">
 				<AddComment />
 				<VisibleComments />
+				<SettingPages />
 			</div>
 		);
 	}

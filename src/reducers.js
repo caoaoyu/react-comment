@@ -1,7 +1,9 @@
+import { next_page } from './actions';
+
 // import { combineReducers } from 'redux'
 
 const comments_reducer = (state, action) => {
-	state = state || { comments: [], pages_nums: false, page_comment: [], one_max: 7 };
+	state = state || { comments: [], pages_nums: -1, now_page: 1, page_comment: [], one_max: 7 };
 	switch (action.type) {
 		case 'ADD_COMMENT':
 			return add(state, action.payload);
@@ -13,6 +15,10 @@ const comments_reducer = (state, action) => {
 			return deletel(state, action.payload);
 		case 'GET_COMMENT':
 			return get(state, action.payload);
+		case 'NEXT_PAGE':
+			return next(state, action.payload);
+		case 'PREVIOUS_PAGE':
+			return previous(state, action.payload);
 		default:
 			return state;
 	}
@@ -34,7 +40,7 @@ const comments_reducer = (state, action) => {
 const get = (state, payload) => {
 	// state.comments = payload.comments;
 	console.log('GET_COMMENT', state, payload);
-	return { ...payload};
+	return { ...payload };
 };
 
 const add = (state, payload) => {
@@ -55,7 +61,17 @@ const change = (state, payload) => {
 const deletel = (state, payload) => {
 	state.comments = payload;
 	console.log('DELTEL_COMMENT', { ...state, ...payload });
-	return { ...state};
+	return { ...state };
+};
+
+const next = (state, payload) => {
+	console.log('DELTEL_COMMENT', { ...state, ...payload });
+	return { ...state };
+};
+
+const previous = (state, payload) => {
+	console.log('DELTEL_COMMENT', { ...state, ...payload });
+	return { ...state };
 };
 
 export default comments_reducer;

@@ -18,7 +18,7 @@ const mapDispatchToProps = (dispatch) => {
 		on_find: (payload) => {
 			dispatch(find_comment(payload));
 		},
-		on_deltel: (payload) => {
+		on_delte: (payload) => {
 			dispatch(deltel_comment(payload));
 		},
 	};

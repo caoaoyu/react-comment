@@ -7,7 +7,6 @@ export const get_model_array = (max) => {
 		return {
 			comments: array,
 			page_comment: array,
-			pages_nums: false
 		};
 	}
 	return {
