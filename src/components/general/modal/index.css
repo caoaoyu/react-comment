@@ -1,0 +1,43 @@
+.modal_show {
+    display: block;
+    opacity: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    width: 100px;
+    position: absolute;
+    right: 0;
+    bottom: -58px;
+    font-size: 12px;
+    border-radius: 5px;
+    background-color: #b4afafa2;
+    z-index: 1024;
+}
+
+.modal_context{
+width: 100%;
+    text-align: center;
+    padding: 0px;
+    margin: 5px;
+}
+
+.operating_sure {
+    margin: 0 5px 0 5px;
+    color: #eeeaea !important;
+    border-radius: 3px;
+}
+
+.operating_close {
+    color: #2da25f;
+    margin: 0 5px 0 5px;
+    border-radius: 3px;
+}
+
+.operation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+}

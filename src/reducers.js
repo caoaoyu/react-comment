@@ -54,8 +54,9 @@ const change = (state, payload) => {
 };
 
 const deletel = (state, payload) => {
+	state.comments = payload;
 	console.log('DELTEL_COMMENT', { ...state, ...payload });
-	return { ...state, ...payload };
+	return { ...state};
 };
 
 export default comments_reducer;

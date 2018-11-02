@@ -1,7 +1,27 @@
-.comment_time{
+.opticton_comment{
     position: absolute;
     right: 14px;
-    bottom: 5px;
+    bottom: 0;
     font-size: 12px;
     color: #666;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.delete_comment{
+    padding-left: 20px;
+}
+
+.delete_comment:hover {
+    cursor: pointer;
+    color: #d81608;
+}
+
+.show_comment_delete {
+    text-decoration: line-through;
+    color: #999999;
+}
+
+.show_comment_delete > .opticton_comment {
+    color: #999999 !important;
 }
