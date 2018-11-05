@@ -36,7 +36,7 @@ module.exports = {
 		//在配置文件里添加JSON loader
 		rules: [
 			{ test: /\.json$/, loader: 'json-loader' },
-			{ test: /\.css$/, loader: 'style-loader!css-loader' },
+			{ test: /\.(css)$/, loader: 'style-loader!css-loader' },
 			{ test: /\.(png|jpg|gif)$/, loader: 'file-loader?name=images/[hash:8].[name].[ext]' }, //图片打包配置
 			{
 				test: /\.(js|jsx)$/,

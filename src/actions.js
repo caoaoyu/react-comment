@@ -6,8 +6,7 @@ export const GET_COMMENT = 'GET_COMMENT';
 export const SHOW_ALL = 'SHOW_ALL';
 export const SHOW_Find = 'SHOW_Find';
 export const SHOW_DELETEL = 'SHOW_DELETEL';
-export const NEXT_PAGE = 'NEXT_PAGE';
-export const PREVIOUS_PAGE = 'PREVIOUS_PAGE';
+export const PAGINATION_PAGE = 'PAGINATION_PAGE';
 
 export const get_comment = (payload) => {
 	return {
@@ -43,16 +42,9 @@ export const deltel_comment = (payload) => {
 };
 
 
-export const next_page = (payload) => {
+export const on_pagination_page = (payload) => {
 	return {
-		type: NEXT_PAGE,
-		payload
-	};
-};
-
-export const previous_page = (payload) => {
-	return {
-		type: PREVIOUS_PAGE,
+		type: PAGINATION_PAGE,
 		payload
 	};
 };

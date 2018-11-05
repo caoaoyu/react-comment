@@ -6,7 +6,6 @@ import { add_model } from './model';
 class AddComment extends React.Component {
 	constructor(props) {
 		super(props);
-		this.my_ref = React.createRef();
 		this.state = {
 			vul: '',
 			exceed: false,

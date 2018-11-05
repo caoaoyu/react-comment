@@ -1,6 +1,48 @@
-.pagination_container{
-    width: 100%;
-    height: 50px;
-    display: flex;
-    justify-content: center;
+.pagination_container {
+	width: 100%;
+	height: 50px;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	color: #666;
+}
+
+.page_numbers {
+	height: 100%;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+}
+
+.pages_number {
+	padding: 0px 10px;
+	cursor: pointer;
+}
+
+.pages_number:hover,
+.now_page_number,
+.pre_icon_active:hover,
+.next_icon_active:hover {
+	color: #2d8f8fbb;
+}
+
+.pre_icon,
+.next_icon {
+	padding: 0 10px;
+	color: #cccccc;
+	cursor: pointer;
+}
+
+.pre_icon_active,
+.next_icon_active {
+	color: #666666;
 }

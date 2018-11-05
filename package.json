@@ -27,10 +27,13 @@
     "classnames": "^2.2.6",
     "css-loader": "^1.0.1",
     "fast-uglifyjs-plugin": "^0.3.0",
+    "node-sass": "^4.10.0",
     "prop-types": "^15.6.2",
     "randomatic": ">=3.0.0",
     "react-redux": "^5.1.0",
     "redux": "^4.0.1",
+    "sass-loader": "^7.1.0",
+    "scss-loader": "^0.0.1",
     "style-loader": "^0.23.1",
     "transform-runtime": "^0.0.0"
   }
