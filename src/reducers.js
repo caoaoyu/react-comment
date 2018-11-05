@@ -38,6 +38,7 @@ const get = (state, payload) => {
 
 const add = (state, payload) => {
 	console.log('ADD_COMMENT', { ...state, ...payload });
+	state.pages_nums = Math.ceil(payload.comments.length / state.one_max)
 	return { ...state, ...payload };
 };
 

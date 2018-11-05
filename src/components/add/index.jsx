@@ -2,12 +2,14 @@ import React from 'react';
 import cs from 'classnames';
 import PropTypes from 'prop-types';
 import { add_model } from './model';
+const Chance = require('chance');
+const chance = new Chance();
 
 class AddComment extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			vul: '',
+			vul: chance.string(),
 			exceed: false,
 			max: 60
 		};
@@ -21,7 +23,7 @@ class AddComment extends React.Component {
 		if (this.state.vul.length > 0) {
 			add_model(this.props, this.state.vul);
 			this.setState({
-				vul: '',
+				vul: chance.string(),
 				exceed: false
 			});
 		}
