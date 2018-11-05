@@ -23,7 +23,7 @@ class Item extends React.Component {
 	}
 
 	handle_hide() {
-		console.log('handle_hide')
+		console.log('handle_hide');
 		this.setState({ show_modal: false });
 	}
 
@@ -37,7 +37,7 @@ class Item extends React.Component {
 	render() {
 		const { page_comment, data, handle_delete, comments } = this.props;
 		return (
-			<div className={cs({"show_comment": true, 'show_comment_delete': data.delete})}>
+			<div className={cs({ show_comment: true, show_comment_delete: data.delete })}>
 				<p>{data.text}</p>
 
 				<div className="opticton_comment">

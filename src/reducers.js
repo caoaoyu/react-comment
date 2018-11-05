@@ -13,23 +13,18 @@ const comments_reducer = (state, action) => {
 			return get(state, action.payload);
 		case 'PAGINATION_PAGE':
 			return pagination(state, action.payload);
+		case 'SHOW_Find':
+			return show_find(state);
+		case 'SHOW_DELETEL':
+			return show_del(state);
+		case 'SHOW_ALL':
+			return show_all(state);
+		case 'SHOW_DELETEL':
+			return show_not_del(state);
 		default:
 			return state;
 	}
 };
-
-// const visible_comments = (list, filter) => {
-// 	switch (filter) {
-// 		case 'SHOW_Find':
-// 			return list.filter((e) => e.id !== filter.id);
-// 		case 'SHOW_DELETEL':
-// 			return list.filter((e) => !e.deltel);
-// 		case 'SHOW_ALL':
-// 			return list;
-// 		default:
-// 			return list;
-// 	}
-// };
 
 const get = (state, payload) => {
 	console.log('GET_COMMENT', state, payload);
@@ -38,7 +33,7 @@ const get = (state, payload) => {
 
 const add = (state, payload) => {
 	console.log('ADD_COMMENT', { ...state, ...payload });
-	state.pages_nums = Math.ceil(payload.comments.length / state.one_max)
+	state.pages_nums = Math.ceil(payload.comments.length / state.one_max);
 	return { ...state, ...payload };
 };
 

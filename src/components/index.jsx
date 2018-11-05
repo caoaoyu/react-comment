@@ -7,7 +7,7 @@ import { get_comment } from '../actions';
 import AddComment from '../container/addComments';
 import VisibleComments from '../container/visibleComments';
 import SettingPages from '../container/settingPages';
-
+import SelectComment from '../container/selectContainer';
 class App extends React.Component {
 	constructor(props) {
 		super(props);
@@ -22,6 +22,7 @@ class App extends React.Component {
 		return (
 			<div className="container">
 				<AddComment />
+				<SelectComment />
 				<VisibleComments />
 				<SettingPages />
 			</div>

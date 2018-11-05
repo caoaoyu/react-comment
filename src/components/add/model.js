@@ -7,7 +7,7 @@ export const add_model = (params, text) => {
 	let array = list ? JSON.parse(list) : [];
 	let comments = array.concat(comment);
 	localStorage.setItem('comment', JSON.stringify(comments));
-	const start = (params.now_page - 1) * params.one_max
+	const start = (params.now_page - 1) * params.one_max;
 	const page_comment = comments.length < 7 ? comments : comments.slice(start, start + 7);
 	params.on_add_click({ comments, page_comment, ids: comments.length });
 	return;

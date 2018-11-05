@@ -1,0 +1,27 @@
+.select_container {
+	width: 62.5%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	border: 1px solid #efefef;
+	border-radius: 5px;
+}
+
+.select_container span {
+	border-right: 1px solid #efefef;
+    width: 33.3%;
+	display: flex;
+	justify-content: center;
+	cursor: pointer;
+	padding: 5px 0;
+}
+
+.select_container span:hover {
+    cursor: pointer;
+    border-right: 1px solid #dad8d8;
+	background-color: #dad8d8;
+}
+
+.select_container span:last-child {
+	border: none !important;
+}
