@@ -6,6 +6,7 @@ import AddComment from '../components/add/index'
 const mapStateToProps = (state) =>{
     return {
 		ids: state.comments.length,
+		comments: state.comments,
 	};
 }  
 

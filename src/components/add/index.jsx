@@ -19,8 +19,7 @@ class AddComment extends React.Component {
 	}
 	add_comment(param) {
 		if (this.state.vul.length > 0) {
-			const comments = add_model(this.props.ids, this.state.vul);
-			console.log(comments)
+			const comments = add_model(this.props.comments, this.props.ids, this.state.vul);
 			this.props.on_add_click({ comments });
 			this.setState({
 				vul: '',
@@ -70,7 +69,8 @@ class AddComment extends React.Component {
 
 AddComment.propTypes = {
 	on_add_click: PropTypes.func.isRequired,
-	ids: PropTypes.number.isRequired
+	ids: PropTypes.number.isRequired,
+	comments: PropTypes.array.isRequired,
 };
 
 export default AddComment;

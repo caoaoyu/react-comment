@@ -1,7 +1,6 @@
-export const add_model = (before_id, text) => {
+export const add_model = (data, len, text) => {
 	let replace_text = text.replace(/\r\n/g, '<br/>'); //IE9、FF、chrome //空格处理
-	console.log(replace_text)
-	let id = before_id + 1;
+	let id = data[len - 1] ? data[len - 1].id + 1 : 1;
 	let time = new Date().getTime();
 	let comment = [ { id, text: replace_text, delete:false, time} ];
 	var list = localStorage.comment;
