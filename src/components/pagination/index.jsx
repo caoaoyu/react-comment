@@ -11,8 +11,6 @@ export default class Pagination extends React.Component {
 			page_comment: []
 		};
         this.pages_number = this.pages_number.bind(this);
-        this.handle_next_page = this.handle_next_page.bind(this);
-        this.handle_prev_page = this.handle_prev_page.bind(this);
 	}
 
 	pages_number() {
@@ -37,14 +35,6 @@ export default class Pagination extends React.Component {
 		return list;
     }
     
-    handle_next_page() {
-        on_next(this.props);
-    }
-
-    handle_prev_page() {
-        on_previous(this.props);
-    }
-
 	render() {
         const { pages_nums, now_page } = this.props;
 		const pre_icon = (
