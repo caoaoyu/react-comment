@@ -5,5 +5,5 @@ export const operction_del = (array, id, comments) => {
 		}
 	}
 	localStorage.setItem('comment', JSON.stringify(comments));
-	return array;
+	return comments;
 };

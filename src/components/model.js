@@ -3,15 +3,16 @@ export const get_model_array = (max) => {
 	const list_string = localStorage.comment;
 	const array = list_string ? JSON.parse(list_string) : [];
 	if (array.length <= 0) return { comments: array };
+	const comments = array.sort((a, b) => b.time - a.time);
 	if (array.length < 7) {
 		return {
-			comments: array,
-			page_comment: array
+			comments,
+			page_comment: comments
 		};
 	}
 	return {
-		comments: array,
-		page_comment: array.slice(0, 7),
-		pages_nums: Math.ceil(array.length / max)
+		comments,
+		page_comment: comments.slice(0, 7),
+		pages_nums: Math.ceil(comments.length / max)
 	};
 };

@@ -18,6 +18,7 @@ const List = ({ page_comment, on_delte, comments }) => {
 };
 
 List.propTypes = {
+	select_comments: PropTypes.array.isRequired,
 	page_comment: PropTypes.array.isRequired,
 	comments: PropTypes.array.isRequired,
 	on_delte: PropTypes.func.isRequired
