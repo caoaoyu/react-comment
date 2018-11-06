@@ -4,47 +4,24 @@ export const CHANGE_COMMENT = 'CHANGE_COMMENT';
 export const DELTEL_COMMENT = 'DELTEL_COMMENT';
 export const GET_COMMENT = 'GET_COMMENT';
 export const SHOW_ALL = 'SHOW_ALL';
-export const SHOW_Find = 'SHOW_Find';
+export const SHOW_FIND = 'SHOW_FIND';
 export const SHOW_DELETEL = 'SHOW_DELETEL';
+export const SHOW_NOT_DELETEL = 'SHOW_NOT_DELETEL';
 export const PAGINATION_PAGE = 'PAGINATION_PAGE';
 
-export const get_comment = (payload) => {
-	return {
-		type: GET_COMMENT,
-		payload
-	};
-};
+export const get_comment = (payload) => general_payload(GET_COMMENT, payload);
+export const add_comment = (payload) => general_payload(ADD_COMMENT, payload);
+export const find_comment = (payload) => general_payload(FIND_COMMENT, payload);
+export const change_comment = (payload) => general_payload(CHANGE_COMMENT, payload);
+export const deltel_comment = (payload) => general_payload(DELTEL_COMMENT, payload);
+export const on_pagination_page = (payload) => general_payload(PAGINATION_PAGE, payload);
+export const show_del = (payload) => general_payload(SHOW_DELETEL, payload);
+export const show_not_del = (payload) => general_payload(SHOW_NOT_DELETEL, payload);
+export const show_all = (payload) => general_payload(SHOW_ALL, payload);
 
-export const add_comment = (payload) => {
+const general_payload = (action, payload) => {
 	return {
-		type: ADD_COMMENT,
-		payload
-	};
-};
-
-export const find_comment = (payload) => {
-	return {
-		type: FIND_COMMENT,
-		payload
-	};
-};
-export const change_comment = (payload) => {
-	return {
-		type: CHANGE_COMMENT,
-		payload
-	};
-};
-export const deltel_comment = (payload) => {
-	return {
-		type: DELTEL_COMMENT,
-		payload
-	};
-};
-
-
-export const on_pagination_page = (payload) => {
-	return {
-		type: PAGINATION_PAGE,
+		type: action,
 		payload
 	};
 };

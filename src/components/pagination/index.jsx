@@ -61,6 +61,7 @@ export default class Pagination extends React.Component {
 
 Pagination.prototypes = {
 	comments: PropTypes.array,
+	select_comments: PropTypes.array,
 	now_page: PropTypes.number,
 	one_max: PropTypes.number,
 	page_comment: PropTypes.array,

@@ -1,28 +1,29 @@
-import { connect } from 'react-redux'
-import { SHOW_ALL, SHOW_DELETEL, SHOW_NOT_DELETEL  } from '../actions'
-import SelectComment from '../components/select/index'
+import { connect } from 'react-redux';
+import { show_del, show_not_del, show_all } from '../actions';
+import SelectComment from '../components/select/index';
 
-const mapStateToProps = (state) =>{
-    return {
-		ids: state.comments.length,
-		pages_nums: state.pages_nums,
-		one_max: state.one_max,
+const mapStateToProps = (state) => {
+	const { select_active, comments, select_comments, one_max } = state;
+	return {
+		one_max,
+		select_active,
+		comments,
+		select_comments
 	};
-}  
+};
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		on_show_all: () => {
-			dispatch(SHOW_ALL);
+		on_show_all: (payload) => {
+			dispatch(show_all(payload));
 		},
 		on_show_del: (payload) => {
-			dispatch(SHOW_DELETEL);
-		}
-		,
+			dispatch(show_del(payload));
+		},
 		on_show_not: (payload) => {
-			dispatch(SHOW_NOT_DELETEL);
+			dispatch(show_not_del(payload));
 		}
 	};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SelectComment)
+export default connect(mapStateToProps, mapDispatchToProps)(SelectComment);

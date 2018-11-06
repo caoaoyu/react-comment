@@ -8,7 +8,6 @@ export default class Modal extends React.Component {
 	}
 
 	componentWillUnmount() {
-		console.log('modal移除', this.props);
 	}
 
 	render() {

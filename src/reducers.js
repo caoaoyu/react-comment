@@ -1,5 +1,15 @@
+const i_state = {
+	comments: [],
+	pages_nums: -1,
+	now_page: 1,
+	page_comment: [],
+	one_max: 7,
+	select_comments: [],
+	select_active: 'all'
+};
 const comments_reducer = (state, action) => {
-	state = state || { comments: [], pages_nums: -1, now_page: 1, page_comment: [], one_max: 7 };
+	state = state || i_state;
+	console.log(action.type);
 	switch (action.type) {
 		case 'ADD_COMMENT':
 			return add(state, action.payload);
@@ -13,14 +23,14 @@ const comments_reducer = (state, action) => {
 			return get(state, action.payload);
 		case 'PAGINATION_PAGE':
 			return pagination(state, action.payload);
-		case 'SHOW_Find':
-			return show_find(state);
+		case 'SHOW_FIND':
+			return show_find(state, action.payload);
 		case 'SHOW_DELETEL':
-			return show_del(state);
+			return show_del(state, action.payload);
 		case 'SHOW_ALL':
-			return show_all(state);
-		case 'SHOW_DELETEL':
-			return show_not_del(state);
+			return show_all(state, action.payload);
+		case 'SHOW_NOT_DELETEL':
+			return show_not_del(state, action.payload);
 		default:
 			return state;
 	}
@@ -28,7 +38,7 @@ const comments_reducer = (state, action) => {
 
 const get = (state, payload) => {
 	console.log('GET_COMMENT', state, payload);
-	return { ...payload, now_page: 1, one_max: 7 };
+	return { ...state, ...payload, now_page: 1, one_max: 7, select_comments: payload.comments };
 };
 
 const add = (state, payload) => {
@@ -55,6 +65,21 @@ const deletel = (state, payload) => {
 
 const pagination = (state, payload) => {
 	console.log('pagination', { ...state, ...payload });
+	return { ...state, ...payload };
+};
+
+const show_del = (state, payload) => {
+	console.log('SHOW_DELETEL', { ...state, ...payload });
+	return { ...state, ...payload };
+};
+
+const show_not_del = (state, payload) => {
+	console.log('SHOW_NOT_DELETEL', state, payload);
+	return { ...state, ...payload };
+};
+
+const show_all = (state, payload) => {
+	console.log('SHOW_ALL', { ...state, ...payload });
 	return { ...state, ...payload };
 };
 

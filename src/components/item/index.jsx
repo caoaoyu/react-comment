@@ -23,7 +23,6 @@ class Item extends React.Component {
 	}
 
 	handle_hide() {
-		console.log('handle_hide');
 		this.setState({ show_modal: false });
 	}
 
