@@ -44,7 +44,7 @@ const get = (state, payload) => {
 const add = (state, payload) => {
 	console.log('ADD_COMMENT', { ...state, ...payload });
 	state.pages_nums = Math.ceil(payload.comments.length / state.one_max);
-	return { ...state, ...payload };
+	return { ...state, ...payload,  now_page: 1, select_comments: payload.comments};
 };
 
 const find = (state, payload) => {
