@@ -4,7 +4,6 @@ import './index.css';
 import cs from 'classnames';
 import { timeToDate } from '../../../util/index';
 import Modal from '../general/modal/index';
-import { operction_del } from './model';
 
 class Item extends React.Component {
 	constructor(props) {
@@ -15,7 +14,7 @@ class Item extends React.Component {
 		};
 		this.handle_modal = this.handle_modal.bind(this);
 		this.handle_hide = this.handle_hide.bind(this);
-		this.handle_stroge = this.handle_stroge.bind(this);
+		this.handle_delete = this.handle_delete.bind(this);
 	}
 
 	handle_modal() {
@@ -26,15 +25,15 @@ class Item extends React.Component {
 		this.setState({ show_modal: false });
 	}
 
-	handle_stroge(array, id, comments) {
-		let data = operction_del(array, id, comments);
+	handle_delete(id) {
 		this.handle_hide();
-		this.props.handle_delete(data);
+		this.props.fetch_delete(id);
 		return;
 	}
 
 	render() {
-		const { page_comment, data, handle_delete, comments } = this.props;
+		const { data } = this.props;
+
 		return (
 			<div className={cs({ show_comment: true, show_comment_delete: data.delete })}>
 				<p>{data.text}</p>
@@ -50,7 +49,7 @@ class Item extends React.Component {
 				{this.state.show_modal ? (
 					<Modal
 						handle_hide={this.handle_hide}
-						handle_delete={() => this.handle_stroge(page_comment, data.id, comments)}
+						handle_delete={() => this.handle_delete(data.id)}
 						context="确定删除吗"
 					/>
 				) : null}
@@ -63,7 +62,7 @@ Item.prototypes = {
 	comments: PropTypes.array.isRequired,
 	page_comment: PropTypes.array.isRequired,
 	data: PropTypes.object.isRequired,
-	handle_delete: PropTypes.func.isRequired
+	fetch_delete: PropTypes.func.isRequired
 };
 
 export default Item;

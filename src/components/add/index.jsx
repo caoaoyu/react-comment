@@ -1,7 +1,6 @@
 import React from 'react';
 import cs from 'classnames';
 import PropTypes from 'prop-types';
-import { add_model } from './model';
 const Chance = require('chance');
 const chance = new Chance();
 
@@ -14,14 +13,14 @@ class AddComment extends React.Component {
 			max: 60
 		};
 
-		this.add_comment = this.add_comment.bind(this);
+		this.handle_comment = this.handle_comment.bind(this);
 		this.handle_change = this.handle_change.bind(this);
 		this.handle_key_down = this.handle_key_down.bind(this);
 		this.set_comment_value = this.set_comment_value.bind(this);
 	}
-	add_comment(param) {
+	handle_comment(param) {
 		if (this.state.vul.length > 0) {
-			add_model(this.props, this.state.vul);
+			this.props.fetch_add(this.state.vul);
 			this.setState({
 				vul: chance.string(),
 				exceed: false
@@ -60,7 +59,7 @@ class AddComment extends React.Component {
 					onChange={this.handle_change}
 				/>
 				<span className={cs({ max_numbers: true, exxceed_number: exceed })}>{vul.length} / 60</span>
-				<button className="add_comments" type="defult" onClick={this.add_comment}>
+				<button className="add_comments" type="defult" onClick={this.handle_comment}>
 					留言
 				</button>
 			</div>
@@ -69,7 +68,7 @@ class AddComment extends React.Component {
 }
 
 AddComment.propTypes = {
-	on_add_click: PropTypes.func.isRequired,
+	fetch_add: PropTypes.func.isRequired,
 	ids: PropTypes.number.isRequired,
 	comments: PropTypes.array.isRequired,
 	now_page: PropTypes.number.isRequired,

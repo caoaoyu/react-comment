@@ -6,13 +6,13 @@ import './index.css';
 
 const h_list = (array, func, comments) => {
 	return array.map((e, i) => (
-		<Item key={`comment-${i}`} data={e} page_comment={array} comments={comments} handle_delete={func} />
+		<Item key={`comment-${i}`} data={e} page_comment={array} comments={comments} fetch_delete={func} />
 	));
 };
-const List = ({ page_comment, on_delte, comments }) => {
+const List = ({ page_comment, fetch_delete, comments }) => {
 	return (
 		<div className="comment_list">
-			{page_comment.length > 0 ? h_list(page_comment, on_delte, comments) : <None />}
+			{page_comment.length > 0 ? h_list(page_comment, fetch_delete, comments) : <None />}
 		</div>
 	);
 };
@@ -21,7 +21,7 @@ List.propTypes = {
 	select_comments: PropTypes.array.isRequired,
 	page_comment: PropTypes.array.isRequired,
 	comments: PropTypes.array.isRequired,
-	on_delte: PropTypes.func.isRequired
+	fetch_delete: PropTypes.func.isRequired
 };
 
 export default List;
