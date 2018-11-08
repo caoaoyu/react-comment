@@ -52,46 +52,25 @@ const comments_reducer = (state, action) => {
 };
 
 const get = (state, payload) => {
-	console.log('GET_COMMENT', { ...state, ...payload });
 	return {
 		...state,
-		...payload,
-		one_max: 7
+		...payload
 	};
 };
 
 const add = (state, payload) => {
-	console.log('ADD_COMMENT', { ...state, ...payload });
 	return {
 		...state,
 		...payload,
-		now_page: payload.comments.length < 7 ? -1 : 1,
-		pages_nums: Math.ceil(payload.comments.length / state.one_max),
 		select_comments: payload.comments
 	};
 };
 
-const find = (state, payload) => {
-	// console.log('FIND_COMMENT', state);
-	// return {
-	// 	...state,
-	// 	...payload
-	// };
-};
+const find = (state, payload) => {};
 
-const change = (state, payload) => {
-	// console.log('CHANGE_COMMENT', { ...state, ...payload });
-	// return {
-	// 	...state,
-	// 	...payload
-	// };
-};
+const change = (state, payload) => {};
 
 const deletel = (state, payload) => {
-	console.log('DELTEL_COMMENT', state);
-	console.log('payloadpayloadpayload', payload);
-	console.log({ ...state, ...payload });
-
 	return {
 		...state,
 		...payload
@@ -99,23 +78,31 @@ const deletel = (state, payload) => {
 };
 
 const pagination = (state, payload) => {
-	// console.log('pagination', { ...state, ...payload });
-	return { ...state, ...payload };
+	return {
+		...state,
+		...payload
+	};
 };
 
 const show_del = (state, payload) => {
-	// console.log('SHOW_DELETEL', { ...state, ...payload });
-	return { ...state, ...payload };
+	return {
+		...state,
+		...payload
+	};
 };
 
 const show_not_del = (state, payload) => {
-	// console.log('SHOW_NOT_DELETEL', state, payload);
-	return { ...state, ...payload };
+	return {
+		...state,
+		...payload
+	};
 };
 
 const show_all = (state, payload) => {
-	// console.log('SHOW_ALL', { ...state, ...payload });
-	return { ...state, ...payload };
+	return {
+		...state,
+		...payload
+	};
 };
 
 export default comments_reducer;

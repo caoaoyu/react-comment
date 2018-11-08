@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import './index.css';
 import AddComment from '../container/addComments';
 import VisibleComments from '../container/visibleComments';
 import SettingPages from '../container/settingPages';
 import SelectComment from '../container/selectContainer';
+import './index.css';
 class App extends React.Component {
 	constructor(props) {
 		super(props);

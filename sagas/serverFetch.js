@@ -5,21 +5,20 @@ export const fetch_comments = (state) => {
 		return req.json().then((array) => {
 			if (array.length <= 0) return { comments: array };
 			const comments = array.sort((a, b) => b.time - a.time);
-			if (array.length < state.one_max) {
-				return {
-					comments,
-					now_page: -1,
-					page_comment: comments,
-					select_comments: comments
-				};
-			}
-			return {
-				comments,
-				now_page: 1,
-				select_comments: comments,
-				page_comment: comments.slice(0, state.one_max),
-				pages_nums: Math.ceil(comments.length / state.one_max)
-			};
+			return array.length < state.one_max
+				? {
+						comments,
+						now_page: -1,
+						page_comment: comments,
+						select_comments: comments
+					}
+				: {
+						comments,
+						now_page: 1,
+						select_comments: comments,
+						page_comment: comments.slice(0, state.one_max),
+						pages_nums: Math.ceil(comments.length / state.one_max)
+					};
 		});
 	});
 };
@@ -49,8 +48,11 @@ export const add_comment = (text, state) => {
 			return {
 				comments,
 				page_comment,
+				select_comments: sort_comment,
 				ids: comments.length,
-				select_active: 'all'
+				select_active: 'all',
+				now_page: sort_comment.length < 7 ? -1 : 1,
+				pages_nums: Math.ceil(sort_comment.length / state.one_max)
 			};
 		})
 		.catch((error) => ({ error }));
