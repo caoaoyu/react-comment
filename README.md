@@ -1,4 +1,4 @@
-### react 留言板项目联系
+### react + redux + express + mysql 留言板项目练习
 
 #### 项目结构
 

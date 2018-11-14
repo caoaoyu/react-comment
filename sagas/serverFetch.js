@@ -39,18 +39,6 @@ export const add_comment = (text, state) => {
     return fetch('http://localhost:3000/comments/add', parms)
         .then((result) => result.json())
         .then((active) => active)
-            // const sort_comment = comments.sort((a, b) => b.time - a.time);
-            // const page_comment = sort_comment.length < state.one_max ? sort_comment : sort_comment.slice(start, start + state.one_max);
-            // return {
-            //     comments,
-            //     page_comment,
-            //     select_comments: sort_comment,
-            //     ids: comments.length,
-            //     select_active: 'all',
-            //     now_page: sort_comment.length < 7 ? -1 : 1,
-            //     pages_nums: Math.ceil(sort_comment.length / state.one_max)
-            // };
-        // })
         .catch((error) => ({ error }));
 };
 
