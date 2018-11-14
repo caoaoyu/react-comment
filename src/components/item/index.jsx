@@ -36,10 +36,10 @@ class Item extends React.Component {
 
 		return (
 			<div className={cs({ show_comment: true, show_comment_delete: data.delete })}>
-				<p>{data.text}</p>
+				<p>{data.context}</p>
 
 				<div className="opticton_comment">
-					<span className="comment_time">{timeToDate(data.time)}</span>
+					<span className="comment_time">{timeToDate(data.create_time)}</span>
 					{!data.delete ? (
 						<span className="delete_comment" onClick={this.handle_modal}>
 							删除
@@ -60,7 +60,6 @@ class Item extends React.Component {
 
 Item.prototypes = {
 	comments: PropTypes.array.isRequired,
-	page_comment: PropTypes.array.isRequired,
 	data: PropTypes.object.isRequired,
 	fetch_delete: PropTypes.func.isRequired
 };

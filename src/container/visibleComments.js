@@ -3,8 +3,6 @@ import List from '../components/list/index';
 
 const mapStateToProps = (state) => {
 	return {
-		page_comment: state.page_comment,
-		select_comments: state.select_comments,
 		comments: state.comments,
 	};
 };

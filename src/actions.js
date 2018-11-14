@@ -10,12 +10,13 @@ export const SHOW_FIND = 'SHOW_FIND';
 export const SHOW_DELETEL = 'SHOW_DELETEL';
 export const SHOW_NOT_DELETEL = 'SHOW_NOT_DELETEL';
 export const PAGINATION_PAGE = 'PAGINATION_PAGE';
+export const CHANGE_PAGE = 'CHANGE_PAGE';
 export const FETCH_ACTION = 'FETCH_ACTION';
 export const DELTEL_FETCH_COMMENT = 'DELTEL_FETCH_COMMENT';
 
 export const find_comment = (payload) => general_payload(FIND_COMMENT, payload);
 export const change_comment = (payload) => general_payload(CHANGE_COMMENT, payload);
-export const on_pagination_page = (payload) => general_payload(PAGINATION_PAGE, payload);
+// export const on_pagination_page = (payload) => general_payload(PAGINATION_PAGE, payload);
 export const show_del = (payload) => general_payload(SHOW_DELETEL, payload);
 export const show_not_del = (payload) => general_payload(SHOW_NOT_DELETEL, payload);
 export const show_all = (payload) => general_payload(SHOW_ALL, payload);

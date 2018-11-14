@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "build": "webpack --mode development",
-    "start": "node server/app.js & webpack-dev-server --config webpack.config.js --progress --inline --colors --port 1337 --host 0.0.0.0"
+    "start": "node-dev server/app.js & webpack-dev-server --config webpack.config.js --progress --inline --colors --port 1337 --host 0.0.0.0"
   },
   "author": "aoyo",
   "license": "ISC",
@@ -49,6 +49,7 @@
     "fast-uglifyjs-plugin": "^0.3.0",
     "fs": "0.0.1-security",
     "multer": "^1.4.1",
+    "mysql": "^2.10.2",
     "node-sass": "^4.10.0",
     "prop-types": "^15.6.2",
     "randomatic": ">=3.0.0",
