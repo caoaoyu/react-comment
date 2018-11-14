@@ -14,7 +14,7 @@ function* add_comments(action) {
 	const state = yield select();
 	try {
 		const payload = yield call(() => Api.add_comment(action.payload, state));
-		yield put({ type: 'ADD_COMMENT', payload });
+		yield put({ type: 'FETCH_COMMENT', payload });
 	} catch (e) {
 		yield put({ type: 'FETCH_ACTION', payload: { message: e.message } });
 	}
