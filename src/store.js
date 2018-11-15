@@ -5,7 +5,7 @@ import logger from 'redux-logger'
 import saga_comments from '../sagas/index';
 
 const sagaMiddleware = createSagaMiddleware();
-const store = createStore(comments_reducer, applyMiddleware(logger, sagaMiddleware));
+const store = createStore(comments_reducer, applyMiddleware(sagaMiddleware));
 sagaMiddleware.run(saga_comments);
 
 export default store;
