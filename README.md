@@ -26,6 +26,7 @@
 
     npm i 或者 yarn install
 
+需下载 XAMPP来开启 mysql 服务
 
 开发：
 
