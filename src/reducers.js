@@ -8,7 +8,7 @@ const i_state = {
     page_comment: [],
     one_max: 7,
     select_comments: [],
-    select_active: 0
+    select_active: 1
 };
 const comments_reducer = (state, action) => {
     state = state || i_state;
