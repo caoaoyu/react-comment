@@ -30,8 +30,19 @@ function* delete_comment(action) {
 	}
 }
 
+function* update_comment(action) {
+	const state = yield select();
+	try {
+		const payload = yield call(() => Api.update_comments(action.payload, state));
+		yield put({ type: 'UPDATE_COMMENTS', payload });
+	} catch (e) {
+		yield put({ type: 'FETCH_ACTION', payload: { message: e.message } });
+	}
+}
+
 function* saga_comments() {
 	yield all([
+		yield takeEvery('UPDATE_COMMENT', update_comment),
 		yield takeEvery('CHANGE_PAGE', fetch_comments),
 		yield takeEvery('FETCH_COMMENT', fetch_comments),
 		yield takeEvery('FETCH_ADD_COMMENT', add_comments),

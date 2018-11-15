@@ -8,13 +8,18 @@
     justify-content: flex-start;
 }
 
-.delete_comment{
+.icon_span, .icon_span_red, .icon_span_green{
     padding-left: 20px;
 }
 
-.delete_comment:hover {
+.icon_span_red:hover {
     cursor: pointer;
     color: #d81608;
+}
+
+.icon_span_green:hover {
+    cursor: pointer;
+    color: #228527;
 }
 
 .show_comment_delete {
@@ -24,4 +29,10 @@
 
 .show_comment_delete > .opticton_comment {
     color: #999999 !important;
+}
+
+.edit_comment {
+    width: 99%;
+    height: 50px;
+    border-radius: 5px;
 }

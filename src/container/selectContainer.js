@@ -10,10 +10,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        on_show: (payload) => {
-            console.log(payload)
-            dispatch({ type: 'SHOW_FETCH_COMMENTS', payload });
-        }
+        on_show: (payload) => dispatch({ type: 'SHOW_FETCH_COMMENTS', payload })
     };
 };
 

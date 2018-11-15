@@ -13,10 +13,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // 	res.render('index.html', { a: 3 });
 // });
 
-app.get('/asyncData', (req, res) => {
-	res.header('Access-Control-Allow-Origin', '*');
-	res.json({ name: Math.random() });
-});
+// app.get('/asyncData', (req, res) => {
+// 	res.header('Access-Control-Allow-Origin', '*');
+// 	res.json({ name: Math.random() });
+// });
 
 app.use('/comments', comments);
 

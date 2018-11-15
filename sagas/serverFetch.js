@@ -1,6 +1,5 @@
 export const fetch_comments = (action, state) => {
     const select_active = action.type === 'SHOW_FETCH_COMMENTS' ? action.payload : state.select_active;
-    console.log(select_active)
     const page = action.type === 'CHANGE_PAGE' ? action.payload : 1;
     const url = `http://localhost:3000/comments/get?page=${page}&type=${select_active}`;
     return fetch(url).then((req) => server_error(req.json())).then((result) => {
@@ -17,7 +16,7 @@ export const fetch_comments = (action, state) => {
 
 export const add_comment = (text) => {
     let replace_text = text.replace(/\r\n/g, '<br/>');
-    let create_time = new Date().getTime();
+    let create_time = new Date().getTime().toString();
     let comment = { context: replace_text, state: 1, create_time };
     const parms = {
         method: 'POST',
@@ -27,6 +26,28 @@ export const add_comment = (text) => {
         }
     };
     return fetch('http://localhost:3000/comments/add', parms).then((result) => result.json()).then((active) => active).catch((error) => ({ error }));
+};
+
+export const update_comments = (payload, state) => {
+    const parms = {
+        method: 'POST',
+        body: JSON.stringify({ ...payload }),
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        }
+    };
+    async function update_result() {
+        await fetch('http://localhost:3000/comments/update', parms).then((result) => result.json()).then((active) => active).catch((error) => {
+            throw new Error(error);
+        });
+        const url = `http://localhost:3000/comments/get?page=${state.now_page}&type=${state.select_active}`;
+        return await fetch(url).then((req) => server_error(req.json())).catch((error) => {
+            throw new Error(error);
+        });
+    }
+    return update_result().then((payload) => {
+        return { comments: payload.comments };
+    });
 };
 
 export const fetch_delete_comment = (id, state) => {

@@ -1,4 +1,5 @@
-import { ADD_COMMENT, FIND_COMMENT, CHANGE_COMMENT, DELTEL_GET_COMMENT, GET_COMMENT, SHOW_FIND, PAGINATION_PAGE, FETCH_ACTION, SHOW_GENRE } from './actions';
+import { ADD_COMMENT, FIND_COMMENT, UPDATE_COMMENTS, DELTEL_GET_COMMENT, GET_COMMENT, SHOW_FIND, PAGINATION_PAGE, FETCH_ACTION, SHOW_GENRE } from './actions';
+import update from 'react-addons-update';
 
 const i_state = {
     comments: [],
@@ -16,7 +17,7 @@ const comments_reducer = (state, action) => {
             return general_update(state, action.payload);
         case FIND_COMMENT:
             return general_update(state, action.payload);
-        case CHANGE_COMMENT:
+        case UPDATE_COMMENTS:
             return general_update(state, action.payload);
         case DELTEL_GET_COMMENT:
             return general_update(state, action.payload);
@@ -36,9 +37,11 @@ const comments_reducer = (state, action) => {
 };
 
 const general_update = (state, payload) => {
+	// console.log(Object.assign({...state}, payload) )
+	console.log(payload)
     return {
         ...state,
-        ...payload
+		...payload,
 	};
 }
 
