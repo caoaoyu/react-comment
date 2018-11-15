@@ -37,8 +37,6 @@ const comments_reducer = (state, action) => {
 };
 
 const general_update = (state, payload) => {
-	// console.log(Object.assign({...state}, payload) )
-	console.log(payload)
     return {
         ...state,
 		...payload,
