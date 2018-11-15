@@ -24,10 +24,13 @@ router.all('*', (req, res, next) => {
 });
 
 router.get('/get', (req, res) => {
-    const { page, type } = req.query;
+    const { page, type, find_context } = req.query;
     var start = (page - 1) * 7;
     const p1 = new Promise((resolve, reject) => {
-        connection.query(`SELECT * FROM message ${type == 0 ? '' : ` WHERE state=${type}`} order by id desc LIMIT ${start}, 7`, (error, result) => {
+        connection.query(`SELECT * FROM message 
+        ${type == 0 ? '' : ` WHERE state=${type} `} 
+        ${find_context ? `AND context REGEXP '${find_context}'` : ''} 
+        order by id desc LIMIT ${start}, 7`, (error, result) => {
             error ? reject(error) : resolve(result);
         });
     });
@@ -67,6 +70,37 @@ router.post('/add', (req, res) => {
         err ? res.json({ error: '服务器错误' }) : res.json({ success: true });
         if (err) console.log('[INSERT ERROR] - ', err.message);
     });
+});
+
+router.post('/find', (req, res) => {
+    const { find_context } = req.body;
+    if (!find_context) return res.json({ error: '缺少传递值' });
+    const findSql1 = `SELECT * FROM message WHERE context REGEXP '${find_context}' AND state=${req.body.type || 1}`;
+    const findSql2 = `SELECT COUNT(*) AS total FROM message WHERE context REGEXP '${find_context}' AND state=${req.body.type || 1}`;
+
+    const f1 = new Promise((resolve, reject) => {
+        connection.query(findSql1, (error, result) => {
+            error ? reject(error) : resolve(result);
+        });
+    });
+    const f2 = new Promise((resolve, reject) => {
+        connection.query(findSql2, (error, result) => {
+            error ? reject(error) : resolve(result);
+        });
+    });
+
+    Promise.all([ f1, f2 ])
+        .then((result) => {
+            const comments = result[0];
+            const total = result[1];
+            res.json({
+                comments,
+                pages_max: Math.ceil(JSON.parse(JSON.stringify(total))[0].total / 7)
+            });
+        })
+        .catch((error) => {
+            throw new Error(error);
+        });
 });
 
 router.delete('/delete', (req, res) => {

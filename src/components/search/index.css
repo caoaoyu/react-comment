@@ -1,0 +1,28 @@
+.search_container {
+    width: 63%;
+    min-height: 60px;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.search_container > input {
+    width: 50%;
+    min-height: 40px;
+    min-width: 200px;
+    border: 1px solid #efefef;
+    border-radius: 5px;
+    font-size: 20px;
+    margin-right: 20px;
+}
+
+.search_container > span {
+    cursor: pointer;
+}
+
+.search_container > span:hover {
+    color: #32a3a7
+}

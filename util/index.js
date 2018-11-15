@@ -45,13 +45,15 @@ export const timeToFormat = (before, time) => {
     if (s <= now_s) return s_date;
 };
 
-export const Get = (url) => {
-    return fetch(url).then((res) => server_error(res.json())).catch((error) => {
+const host = 'http://localhost:3000/';
+
+export const Get = (url_parms) => {
+    return fetch(`${host}${url_parms}`).then((res) => server_error(res.json())).catch((error) => {
         throw new Error(error);
     });
 };
 
-export const Post = (url, body) => {
+export const Post = (url_parms, body) => {
     const parms = {
         method: 'POST',
         body: JSON.stringify(body),
@@ -59,12 +61,12 @@ export const Post = (url, body) => {
             'Content-Type': 'application/json;charset=utf-8'
         }
     };
-    return fetch(url, parms).then((res) => server_error(res.json())).catch((error) => {
+    return fetch(`${host}${url_parms}`, parms).then((res) => server_error(res.json())).catch((error) => {
         throw new Error(error);
     });
 };
 
-export const Delete = (url, body) => {
+export const Delete = (url_parms, body) => {
     const parms = {
         method: 'DELETE',
         body: JSON.stringify(body),
@@ -72,7 +74,7 @@ export const Delete = (url, body) => {
             'Content-Type': 'application/json;charset=utf-8'
         }
     };
-    return fetch(url, parms).then((res) => server_error(res.json())).catch((error) => {
+    return fetch(`${host}${url_parms}`, parms).then((res) => server_error(res.json())).catch((error) => {
         throw new Error(error);
     });
 };

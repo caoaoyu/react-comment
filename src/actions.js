@@ -15,3 +15,5 @@ export const SHOW_FETCH_COMMENTS = 'SHOW_FETCH_COMMENTS';
 export const PAGINATION_PAGE = 'PAGINATION_PAGE';
 export const CHANGE_PAGE = 'CHANGE_PAGE';
 export const FETCH_ACTION = 'FETCH_ACTION';
+
+export const FIND_RESRT = 'FIND_RESRT';
