@@ -1,0 +1,39 @@
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+.login_accounts {
+	display: flex;
+	flex-flow: column;
+	justify-items: center;
+    align-items: center;
+    border: 1px solid #89aae7;
+    padding: 20px 100px;
+    border-radius: 8px;
+}
+
+.login_user {
+    margin-top: 10px;
+}
+.login_user input  {
+    border: 1px solid #efefef;
+    width: 200px;
+    height: 40px;
+    border-radius: 4px;
+    padding: 0px 5px;
+}
+
+.login_btn_group button {
+    border: 1px solid #efefef;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.login_btn_group {
+    margin-top: 20px;
+    display: flex;
+    width: 80%;
+    align-items: center;
+    justify-content: space-around;
+}

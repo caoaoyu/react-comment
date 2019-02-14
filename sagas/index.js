@@ -1,6 +1,15 @@
 import { call, put, takeEvery, takeLatest, take, select, all } from 'redux-saga/effects';
 import * as Api from './serverFetch';
 
+function* fetch_user(action) {
+	const state = yield select();
+	try {
+		const payload = yield call(() => Api.fetch_user(action, state));
+		yield put({ type: 'USER_INFO', payload });
+	} catch (e) {
+		yield put({ type: 'FETCH_ACTION', payload: { message: e.message } });
+	}
+}
 function* fetch_comments(action) {
 	const state = yield select();
 	try {
@@ -61,7 +70,8 @@ function* saga_comments() {
 		yield takeEvery('FETCH_COMMENT', fetch_comments),
 		yield takeEvery('FETCH_ADD_COMMENT', add_comments),
 		yield takeEvery('DELTEL_FETCH_COMMENT', delete_comment),
-		yield takeEvery('SHOW_FETCH_COMMENTS', fetch_comments)
+		yield takeEvery('SHOW_FETCH_COMMENTS', fetch_comments),
+		yield takeEvery('FETCH_USER', fetch_user),
 		
 	]);
 }

@@ -17,3 +17,7 @@ export const CHANGE_PAGE = 'CHANGE_PAGE';
 export const FETCH_ACTION = 'FETCH_ACTION';
 
 export const FIND_RESRT = 'FIND_RESRT';
+
+export const FETCH_USER = 'FETCH_USER';
+export const USER_INFO = 'USER_INFO';
+
