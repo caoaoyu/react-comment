@@ -24,11 +24,10 @@ const comments_reducer = (state, action) => {
 				select_search: ''
 			};
 		case HANDLE_ERROR:
-			console.log('HANDLE_ERROR', state);
-			return Object.assign({
+			return {
 				...state,
 				error: 'false'
-			});
+			};
 		case USER_INFO:
 			return user_stroage(state, action.payload);
 		default:
