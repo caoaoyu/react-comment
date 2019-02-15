@@ -1,4 +1,4 @@
-import { FIND_RESRT, USER_INFO } from './actions';
+import { FIND_RESRT, USER_INFO, HANDLE_ERROR } from './actions';
 const Cookies = require('../util/cookies.min.js');
 
 const i_state = {
@@ -11,20 +11,25 @@ const i_state = {
 	select_active: 1,
 	select_search: '',
 	user: {},
-	cookie: {}
+	cookie: {},
+	error: 'false'
 };
 const comments_reducer = (state, action) => {
 	state = state || i_state;
 
 	switch (action.type) {
 		case FIND_RESRT:
-			state.select_search = '';
 			return {
-				...state
+				...state,
+				select_search: ''
 			};
-
+		case HANDLE_ERROR:
+			console.log('HANDLE_ERROR', state);
+			return Object.assign({
+				...state,
+				error: 'false'
+			});
 		case USER_INFO:
-			console.log(state, action);
 			return user_stroage(state, action.payload);
 		default:
 			return {
@@ -35,13 +40,21 @@ const comments_reducer = (state, action) => {
 };
 
 const user_stroage = (state, payload) => {
-	Cookies.set('account', payload.user.account);
-	Cookies.set('password', payload.user.password);
-	return {
-        user: payload.user,
-        account: payload.user.account,
-        password: payload.user.password,
-	};
+	if (payload.user) {
+		Cookies.set('account', payload.user.account);
+		Cookies.set('password', payload.user.password);
+		return {
+			...state,
+			user: payload.user,
+			account: payload.user.account,
+			password: payload.user.password
+		};
+	} else {
+		return {
+			...state,
+			error: payload.err
+		};
+	}
 };
 
 export default comments_reducer;

@@ -20,4 +20,5 @@ export const FIND_RESRT = 'FIND_RESRT';
 
 export const FETCH_USER = 'FETCH_USER';
 export const USER_INFO = 'USER_INFO';
+export const HANDLE_ERROR = 'HANDLE_ERROR';
 

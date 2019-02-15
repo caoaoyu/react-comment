@@ -2,8 +2,7 @@ import * as util from '../util/index';
 
 export const fetch_user = (action, state) => {
 	return util.Post('comments/login', { ...action.payload }).then((res) => {
-		console.log(res);
-		return { user: res.user };
+		return res;
 	});
 };
 

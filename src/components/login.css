@@ -3,7 +3,7 @@ html, body {
     height: 100%;
 }
 
-.login_accounts {
+.login_account {
 	display: flex;
 	flex-flow: column;
 	justify-items: center;

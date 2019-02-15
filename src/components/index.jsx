@@ -12,6 +12,12 @@ class App extends React.Component {
         super(props);
     }
 
+    componentWillMount() {
+        if(!this.props.user.account) {
+            this.props.history.push('/');
+        }
+    }
+
     componentDidMount() {
         this.props.fetch_comments();
     }
@@ -31,6 +37,7 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
+        user: state.user,
         one_max: state.one_max
     };
 };
@@ -44,6 +51,7 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 App.propTypes = {
+    user: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
     one_max: PropTypes.number,
     fetch: PropTypes.func.isRequired

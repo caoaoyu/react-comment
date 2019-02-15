@@ -2,17 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './login.css';
-import { createHistory } from 'history';
 const Cookies = require('../../util/cookies.min.js');
 
 class Login extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			accounts: '122334',
-			password: '123456',
+			account: '',
+			password: '',
 			cookies: false,
-			info: {}
+			user: {}
 		};
 
 		this.handle_login = this.handle_login.bind(this);
@@ -20,25 +19,37 @@ class Login extends React.Component {
 	}
 
 	componentWillMount() {
-		const accounts = Cookies.get('accounts');
+		const account = Cookies.get('account');
 		const password = Cookies.get('password');
-		if (accounts != undefined && password != undefined) {
-			this.setState({
-				cookies: { accounts, password }
-			});
-			this.handle_login();
+		if (account != undefined && password != undefined) {
+			const cookies = {
+				account,
+				password
+			};
+			this.setState({ cookies });
+			this.props.fetch_user(cookies);
 		}
 	}
 
-	handle_login() {
-		if (this.state.accounts && this.state.password) {
-			this.props.fetch_user({
-				accounts: this.state.accounts,
-				password: this.state.password
-			});
-		} else {
-			return false;
+	shouldComponentUpdate(nextProps, nextState) {
+		if (nextProps.user && nextProps.user.account) {
+			this.props.history.push('/index');
 		}
+
+		console.log('---------', nextProps.error)
+		if(nextProps.error != 'false') {
+			alert(nextProps.error)
+			this.props.handle_error();
+			
+		}
+		return false;
+	}
+
+	handle_login() {
+		this.props.fetch_user({
+			account: this.state.account,
+			password: this.state.password
+		});
 	}
 
 	handle_account(e, name) {
@@ -49,12 +60,13 @@ class Login extends React.Component {
 
 	handle_registered() {}
 	render() {
+		console.log(this.props.error)
 		return (
 			<div className="container">
 				{this.state.cookies ? (
 					<span>Loading</span>
 				) : (
-					<div className="login_accounts">
+					<div className="login_account">
 						<h1>Login</h1>
 						<div className="login_user">
 							<span>📱</span>
@@ -64,9 +76,9 @@ class Login extends React.Component {
 								className="username"
 								placeholder="手机号"
 								onChange={(e) => {
-									this.handle_account(e, 'accounts');
+									this.handle_account(e, 'account');
 								}}
-								value={this.state.accounts || '1111111'}
+								defaultValue={this.state.account || ''}
 							/>
 						</div>
 						<div className="login_user">
@@ -79,7 +91,7 @@ class Login extends React.Component {
 								onChange={(e) => {
 									this.handle_account(e, 'password');
 								}}
-								value={this.state.password || '123456'}
+								defaultValue={this.state.password || ''}
 							/>
 						</div>
 						<div className="login_btn_group">
@@ -98,20 +110,25 @@ class Login extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-	return {
-		user: state.user
-	};
+	return state;
 };
 
 const mapDispatchToProps = (dispatch) => {
 	return {
 		fetch_user: (payload) => {
 			dispatch({ type: 'FETCH_USER', payload });
+		},
+		handle_error: () => {
+			console.log('dispatch')
+			dispatch({type: 'HANDLE_ERROR'})
 		}
+		
 	};
 };
 
 Login.propTypes = {
+	handle_error: PropTypes.func.isRequired,
+	history: PropTypes.object.isRequired,
 	fetch_user: PropTypes.func.isRequired,
 	dispatch: PropTypes.func.isRequired,
 	fetch: PropTypes.func.isRequired

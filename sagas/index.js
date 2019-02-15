@@ -52,9 +52,8 @@ function* update_comment(action) {
 function* find_comment(action) {
 	const state = yield select();
 	try {
-		console.log('find_comment')
 		const payload = yield call(() => Api.find_comment(action.payload, state));
-		console.log(payload)
+		console.log('find_comment', payload)
 		yield put({ type: 'FIND_COMMENT_SUCCESS', payload });
 	} catch (e) {
 		yield put({ type: 'FETCH_ACTION', payload: { message: e.message } });

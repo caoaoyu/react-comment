@@ -25,17 +25,17 @@ router.all('*', (req, res, next) => {
 
 // 用户登陆
 router.post('/login', (req, res) => {
-	const { accounts, password } = req.body;
-	const s1 = `SELECT * FROM user WHERE account='${accounts}'`;
-	const s2 = `SELECT * FROM user WHERE account='${accounts}' AND password='${password}'`;
+	const { account, password } = req.body;
+	const s1 = `SELECT * FROM user WHERE account='${account}'`;
+	const s2 = `SELECT * FROM user WHERE account='${account}' AND password='${password}'`;
 
-	const accounts_select = new Promise((resolve, reject) => {
+	const account_select = new Promise((resolve, reject) => {
 		connection.query(s1, function(err, result) {
 			if (err) reject(err);
 			result.length < 1 ? resolve({ error: true, err: '账户不存在' }) : resolve({ success: true, user: result[0] });
 		});
 	});
-	accounts_select.then((datas) => {
+	account_select.then((datas) => {
 		if (datas.error) {
 			res.json({ success: true, err: datas.err });
 		} else {
