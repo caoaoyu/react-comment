@@ -58,7 +58,7 @@ class Item extends React.Component {
 
     render() {
         const { data } = this.props;
-
+        console.log(data);
         return (
             <div className={cs({ show_comment: true, show_comment_delete: data.state === 2 })}>
                 {this.state.edit ? <textarea className="edit_comment" value={this.state.edit_context} onChange={(e) => this.set_context(e.target.value)} /> : <p>{data.context}</p>}
@@ -71,9 +71,14 @@ class Item extends React.Component {
                         <span className="comment_time">{timeToDate(Number(data.create_time))}</span>
                     )}
                     {data.state === 1 ? (
-                        <span className="icon_span_red" onClick={() => this.setState({ edit: !this.state.edit, show_modal: false })}>
-                            {this.state.edit ? '取消' : '编辑'}
-                        </span>
+                        <div>
+                            <span className="icon_span_red" onClick={() => this.setState({ edit: !this.state.edit, show_modal: false })}>
+                                {this.state.edit ? '' : '回复'}
+                            </span>
+                            <span className="icon_span_red" onClick={() => this.setState({ edit: !this.state.edit, show_modal: false })}>
+                                {this.state.edit ? '取消' : '编辑'}
+                            </span>
+                        </div>
                     ) : null}
                     {data.state === 1 ? (
                         <span className="icon_span_red" onClick={this.handle_modal}>
