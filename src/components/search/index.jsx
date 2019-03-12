@@ -16,7 +16,7 @@ class Search extends React.Component {
     }
 
     handle_show_input() {
-        this.state.is_text.length > 1 ? this.props.handle_search(this.state.is_text) : this.props.handle_all();
+        this.state.is_text.length > 0 ? this.props.handle_search(this.state.is_text) : this.props.handle_all();
     }
 
     handle_change(e) {

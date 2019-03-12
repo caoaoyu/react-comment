@@ -1,9 +1,8 @@
 .comment_list {
-	width: 100%;
+	width: 63%;
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
-	min-height: 600px;
 	-webkit-box-align: center;
 	-ms-flex-align: center;
 	align-items: center;
@@ -11,16 +10,30 @@
 	-webkit-box-direction: normal;
 	-ms-flex-flow: column;
 	flex-flow: column;
+	max-height: 50%;
+	min-height: 50%;
+	overflow-y: scroll;
+	overflow-x: hidden;
 }
 
 .show_comment {
-	width: 60%;
+	width: 90%;
 	background-color: #f1f5f8;
-	max-height: 56px;
 	padding: 15px;
 	margin: 2px;
 	font-size: 14px;
 	padding: 15px;
 	margin: 2px;
 	position: relative;
+}
+
+::-webkit-scrollbar {
+	width: 3px;
+	border-radius: 5px;
+	background-color: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-track {
+	margin-left: 35px;
+	background-color: transparent;
 }

@@ -24,7 +24,8 @@ class Login extends React.Component {
 		if (account != undefined && password != undefined) {
 			const cookies = {
 				account,
-				password
+				password,
+				cookie: true,
 			};
 			this.setState({ cookies });
 			this.props.fetch_user(cookies);

@@ -36,3 +36,17 @@
     height: 50px;
     border-radius: 5px;
 }
+
+.comment_reply {
+    padding-left: 40px;
+    margin-bottom: 10px;
+}
+
+.reply_item p {
+    margin: 2px 0;
+}
+.reply_item {
+    color: #666;
+    padding-bottom: 5px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}

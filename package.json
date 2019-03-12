@@ -49,6 +49,7 @@
     "express": "^4.16.4",
     "fast-uglifyjs-plugin": "^0.3.0",
     "fs": "0.0.1-security",
+    "md5": "^2.2.1",
     "multer": "^1.4.1",
     "mysql": "^2.10.2",
     "node-sass": "^4.10.0",

@@ -13,13 +13,15 @@ class Item extends React.Component {
             show_modal: false,
             edit_context: '',
             max: 60,
-            edit: false
+            edit: false,
+            replay_edit: false
         };
         this.handle_modal = this.handle_modal.bind(this);
         this.handle_hide = this.handle_hide.bind(this);
         this.handle_delete = this.handle_delete.bind(this);
         this.set_context = this.set_context.bind(this);
         this.handle_edit_sure = this.handle_edit_sure.bind(this);
+        this.item_status = this.item_status.bind(this);
     }
 
     handle_modal() {
@@ -50,43 +52,128 @@ class Item extends React.Component {
         // var character = String.fromCharCode(code);
         // var txt = new RegExp(/["'<>%;)(&+]/);
         if (context.length < 1) return;
-        this.props.update_context({ context, id });
-        this.setState({
-            edit: false
-        });
+        if (this.state.replay_edit) {
+            this.props.data.reply.push({
+                context,
+                name: this.props.data.user.name,
+                time: new Date().getTime().toString()
+            });
+            const cond = {
+                id,
+                reply: this.props.data.reply
+            };
+            this.props.reply_com(cond);
+            this.setState({
+                edit: false,
+                replay_edit: false
+            });
+        } else {
+            this.props.update_context({ context, id });
+            this.setState({
+                edit: false
+            });
+        }
     }
 
-    render() {
-        const { data } = this.props;
-        console.log(data);
-        return (
-            <div className={cs({ show_comment: true, show_comment_delete: data.state === 2 })}>
-                {this.state.edit ? <textarea className="edit_comment" value={this.state.edit_context} onChange={(e) => this.set_context(e.target.value)} /> : <p>{data.context}</p>}
-                <div className="opticton_comment">
-                    {this.state.edit ? (
+    item_status(state) {
+        if (state == 1) {
+            return (
+                <div>
+                    <span
+                        className="icon_span_red"
+                        onClick={() => {
+                            this.setState({
+                                replay_edit: true,
+                                edit: true
+                            });
+                        }}
+                    >
+                        {this.state.replay_edit ? '' : '回复'}
+                    </span>
+                    <span
+                        className="icon_span_red"
+                        onClick={() => {
+                            this.setState({
+                                edit: !this.state.edit,
+                                show_modal: false
+                            });
+                        }}
+                    >
+                        {this.state.edit ? '取消' : '编辑'}
+                    </span>
+                    <span className="icon_span_red" onClick={this.handle_modal}>
+                        {this.state.edit ? '' : '删除'}
+                    </span>
+                </div>
+            );
+        }
+    }
+
+    item_msg(state, data) {
+        if (state.edit) {
+            return (
+                <div className="comm_item">
+                    <textarea
+                        className="edit_comment"
+                        value={state.edit_context}
+                        onChange={(e) => {
+                            this.set_context(e.target.value);
+                        }}
+                    />
+                    <div className="opticton_comment">
                         <span className="icon_span_green" onClick={this.handle_edit_sure}>
                             确认
                         </span>
-                    ) : (
-                        <span className="comment_time">{timeToDate(Number(data.create_time))}</span>
-                    )}
-                    {data.state === 1 ? (
-                        <div>
-                            <span className="icon_span_red" onClick={() => this.setState({ edit: !this.state.edit, show_modal: false })}>
-                                {this.state.edit ? '' : '回复'}
-                            </span>
-                            <span className="icon_span_red" onClick={() => this.setState({ edit: !this.state.edit, show_modal: false })}>
-                                {this.state.edit ? '取消' : '编辑'}
+                        {this.item_status(data.state)}
+                    </div>
+                </div>
+            );
+        } else {
+            return (
+                <blockquote>
+                    <div className="comm_item">
+                        <p>{data.context}</p>
+                        <div className="opticton_comment">
+                            <span className="comment_time">{timeToDate(Number(data.create_time))}</span>
+                            {this.item_status(data.state)}
+                        </div>
+                    </div>
+                    {this.item_reply()}
+                </blockquote>
+            );
+        }
+    }
+
+    item_reply() {
+        return (
+            <div className="comment_reply">
+                {this.props.data.reply.map((e) => {
+                    return (
+                        <div className="reply_item">
+                            <p>{e.context}</p>
+                            <span className="reply_user">
+                               来自: {e.name} - {timeToDate(Number(e.time))}
                             </span>
                         </div>
-                    ) : null}
-                    {data.state === 1 ? (
-                        <span className="icon_span_red" onClick={this.handle_modal}>
-                            {this.state.edit ? '' : '删除'}
-                        </span>
-                    ) : null}
-                </div>
-                {this.state.show_modal ? <Modal handle_hide={this.handle_hide} handle_delete={() => this.handle_delete(data.id)} context="确定删除吗" /> : null}
+                    );
+                })}
+            </div>
+        );
+    }
+    render() {
+        const { data } = this.props;
+        return (
+            <div className={cs({ show_comment: true, show_comment_delete: data.state === 2 })}>
+                {this.item_msg(this.state, data)}
+                {this.state.show_modal ? (
+                    <Modal
+                        handle_hide={this.handle_hide}
+                        handle_delete={() => {
+                            this.handle_delete(data.id);
+                        }}
+                        context="确定删除吗"
+                    />
+                ) : null}
             </div>
         );
     }
@@ -96,7 +183,8 @@ Item.prototypes = {
     comments: PropTypes.array.isRequired,
     data: PropTypes.object.isRequired,
     fetch_delete: PropTypes.func.isRequired,
-    update_context: PropTypes.func.isRequired
+    update_context: PropTypes.func.isRequired,
+    reply_com: PropTypes.func.isRequired
 };
 
 export default Item;
