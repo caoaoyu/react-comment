@@ -33,18 +33,19 @@ router.post('/login', (req, res) => {
     const account_select = new Promise((resolve, reject) => {
         connection.query(s1, function(err, result) {
             if (err) reject(err);
-            result.length < 1 ? resolve({ error: true, err: '账户不存在' }) : resolve({ success: true, user: result[0] });
+            console.log(result);
+            result.length < 1 ? resolve({ error: true, msg: '账户不存在' }) : resolve({ success: true, user: result[0] });
         });
     });
     account_select.then((datas) => {
         if (datas.error) {
-            res.json({ success: true, err: datas.err });
+            res.json(datas);
         } else {
             connection.query(s2, function(err, result) {
                 if (!err) {
-                    result.length < 1 ? res.json({ success: true, err: '账户或者密码错误' }) : res.json({ success: true, user: result[0] });
+                    result.length < 1 ? res.json({ error: true, msg: '账户或者密码错误' }) : res.json({ success: true, user: result[0] });
                 } else {
-                    res.json({ error: '服务器错误' });
+                    res.json({ error: true, msg: '服务器错误' });
                 }
             });
         }
@@ -56,14 +57,14 @@ router.post('/registered', (req, res) => {
     const { account, password, sex, time } = req.body;
     const uid = md5(account, password, time);
     const s1 = `INSERT INTO user(account, password, sex, createTime, uid)
-    VALUES(${account}, '${password}', ${sex}, ${time}, '${uid}')`;
+    VALUES('${account}', '${password}', ${sex}, ${time}, '${uid}')`;
     const s2 = `SELECT * FROM user WHERE account = ${account}`;
     connection.query(s2, (err, info) => {
         if (info) {
-            res.json({ error: '账号已经存在' });
+            res.json({ error: true, msg: '账号已经存在' });
         } else {
             connection.query(s1, (err) => {
-                err ? res.json({ error: '服务器错误' }) : res.json({ success: true });
+                err ? res.json({ error: true, msg: '服务器错误' }) : res.json({ success: true });
                 if (err) console.log('[INSERT ERROR] - ', err.message);
             });
         }
@@ -106,14 +107,14 @@ router.get('/get', (req, res) => {
                 pages_max: Math.ceil(JSON.parse(JSON.stringify(total))[0].total / 7)
             });
         })
-        .catch((error) => res.json({ error }));
+        .catch((error) => res.json({ error: true, msg: '获取留言失败' }));
 });
 
 router.post('/update', (req, res) => {
-    if (!req.body.context) res.json({ error: '缺少 context' });
+    if (!req.body.context) res.json({ error: true, msg: '缺少留言' });
     const update = `UPDATE message SET context='${req.body.context}' WHERE id =${req.body.id}`;
     connection.query(update, (err) => {
-        err ? res.json({ error: '服务器错误' }) : res.json({ success: true });
+        err ? res.json({ error: true, msg: '更新留言失败' }) : res.json({ success: true });
         if (err) console.log('update ERROR] - ', err.message);
     });
 });
@@ -121,26 +122,26 @@ router.post('/reply', (req, res) => {
     if (!req.body.reply) res.json({ error: '缺少 context' });
     const update = `UPDATE message SET reply='${req.body.reply}' WHERE id =${req.body.id}`;
     connection.query(update, (err) => {
-        err ? res.json({ error: '服务器错误' }) : res.json({ success: true });
+        err ? res.json({ error: true, msg: '回复留言失败' }) : res.json({ success: true });
         if (err) console.log('update ERROR] - ', err.message);
     });
 });
 
 router.post('/add', (req, res) => {
     const { state, context, create_time, id } = req.body;
-    if (!state || !context || !create_time) return res.json({ error: '缺少传递值' });
+    if (!state || !context || !create_time) return res.json({ error: true, msg: '缺少传递值' });
     if (!id) return res.json({ error: '缺少用户信息' });
 
     const addSql = `INSERT INTO message(state,context,create_time, uid) VALUES(${state}, '${context}', ${create_time}, ${id})`;
     connection.query(addSql, (err) => {
-        err ? res.json({ error: '服务器错误' }) : res.json({ success: true });
+        err ? res.json({ error: true, msg: '服务器错误' }) : res.json({ success: true });
         if (err) console.log('[INSERT ERROR] - ', err.message);
     });
 });
 
 router.post('/find', (req, res) => {
     const { find_context } = req.body;
-    if (!find_context) return res.json({ error: '缺少传递值' });
+    if (!find_context) return res.json({ error: true, msg: '缺少传递值' });
     const findSql1 = `SELECT * FROM message WHERE context REGEXP '${find_context}' AND state=${req.body.type || 1}`;
     const findSql2 = `SELECT COUNT(*) AS total FROM message WHERE context REGEXP '${find_context}' AND state=${req.body.type || 1}`;
 
@@ -172,7 +173,7 @@ router.post('/find', (req, res) => {
 router.delete('/delete', (req, res) => {
     const update = `UPDATE message SET state=2 WHERE id =${req.body.id}`;
     connection.query(update, function(err, result) {
-        err ? res.json({ error: '服务器错误' }) : res.json({ success: true });
+        err ? res.json({ error: true, msg: '删除留言失败' }) : res.json({ success: true });
         if (err) console.log('update ERROR] - ', err.message);
     });
 });

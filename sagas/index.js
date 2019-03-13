@@ -18,6 +18,8 @@ function* fetch_user(action) {
         const payload = yield call(() => Api.fetch_user(action, state));
         yield put({ type: 'USER_INFO', payload });
     } catch (e) {
+        console.log(e)
+        console.log(err_modal('login', e))
         yield put({
             type: 'FETCH_ACTION',
             payload: err_modal('login', e)

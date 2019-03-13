@@ -65,6 +65,9 @@ class Login extends React.Component {
 
     // 点击登录
     handle_login() {
+        if (this.state.account.length < 1 || this.state.password.length < 1) {
+            return false;
+        }
         this.props.fetch_user({
             account: this.state.account,
             password: this.state.password
@@ -86,6 +89,9 @@ class Login extends React.Component {
     }
     // 注册账号
     handle_registered() {
+        if (this.state.account.length < 1 || this.state.password.length < 1) {
+            return false;
+        }
         this.props.fetch_registered({
             account: this.state.account,
             password: this.state.password
@@ -146,13 +152,14 @@ class Login extends React.Component {
                             />
                         </div>
                         <div className="login_btn_group">
-                            <button className="login_btn" onClick={this.state.registered ? this.handle_registered : this.state.handle_login}>
+                            <button className="login_btn" onClick={this.state.registered ? this.handle_registered : this.handle_login}>
                                 {this.state.registered ? '确认' : '登录'}
                             </button>
                             <button className="login_btn" onClick={this.cancel_registered}>
                                 {this.state.registered ? '取消' : '注册'}
                             </button>
                         </div>
+                        <span className="pass_tip">初始 guest 密码 111111</span>
                     </div>
                 )}
                 <Modal

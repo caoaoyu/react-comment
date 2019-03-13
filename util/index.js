@@ -81,7 +81,7 @@ export const Delete = (url_parms, body) => {
 };
 export const server_error = (active) => {
     return active.then((datas) => {
-        if (datas.error) throw new Error(datas.error);
+        if (datas.error) throw new Error(datas.msg);
         return datas;
     });
 };
