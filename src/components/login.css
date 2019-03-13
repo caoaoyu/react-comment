@@ -1,12 +1,19 @@
-html, body {
+html,
+body {
     width: 100%;
     height: 100%;
 }
 
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .login_account {
-	display: flex;
-	flex-flow: column;
-	justify-items: center;
+    display: flex;
+    flex-flow: column;
+    justify-items: center;
     align-items: center;
     border: 1px solid #89aae7;
     padding: 20px 100px;
@@ -16,7 +23,7 @@ html, body {
 .login_user {
     margin-top: 10px;
 }
-.login_user input  {
+.login_user input {
     border: 1px solid #efefef;
     width: 200px;
     height: 40px;

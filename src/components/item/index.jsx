@@ -3,20 +3,20 @@ import PropTypes from 'prop-types';
 import './index.css';
 import cs from 'classnames';
 import { timeToDate } from '../../../util/index';
-import Modal from '../general/modal/index';
+import Pop from '../general/pop/index';
 
 class Item extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            show_modal: false,
+            show_pop: false,
             edit_context: '',
             max: 60,
             edit: false,
-            replay_edit: false
+            replay_edit: false,
         };
-        this.handle_modal = this.handle_modal.bind(this);
+        this.handle_pop = this.handle_pop.bind(this);
         this.handle_hide = this.handle_hide.bind(this);
         this.handle_delete = this.handle_delete.bind(this);
         this.set_context = this.set_context.bind(this);
@@ -24,12 +24,12 @@ class Item extends React.Component {
         this.item_status = this.item_status.bind(this);
     }
 
-    handle_modal() {
-        this.setState({ show_modal: true });
+    handle_pop() {
+        this.setState({ show_pop: true });
     }
 
     handle_hide() {
-        this.setState({ show_modal: false });
+        this.setState({ show_pop: false });
     }
 
     handle_delete(id) {
@@ -95,13 +95,13 @@ class Item extends React.Component {
                         onClick={() => {
                             this.setState({
                                 edit: !this.state.edit,
-                                show_modal: false
+                                show_pop: false
                             });
                         }}
                     >
                         {this.state.edit ? '取消' : '编辑'}
                     </span>
-                    <span className="icon_span_red" onClick={this.handle_modal}>
+                    <span className="icon_span_red" onClick={this.handle_pop}>
                         {this.state.edit ? '' : '删除'}
                     </span>
                 </div>
@@ -147,12 +147,12 @@ class Item extends React.Component {
     item_reply() {
         return (
             <div className="comment_reply">
-                {this.props.data.reply.map((e) => {
+                {this.props.data.reply.map((e, i) => {
                     return (
-                        <div className="reply_item">
+                        <div className="reply_item" key={`reply_item_${i}`}>
                             <p>{e.context}</p>
                             <span className="reply_user">
-                               来自: {e.name} - {timeToDate(Number(e.time))}
+                                来自: {e.name} - {timeToDate(Number(e.time))}
                             </span>
                         </div>
                     );
@@ -165,8 +165,8 @@ class Item extends React.Component {
         return (
             <div className={cs({ show_comment: true, show_comment_delete: data.state === 2 })}>
                 {this.item_msg(this.state, data)}
-                {this.state.show_modal ? (
-                    <Modal
+                {this.state.show_pop ? (
+                    <Pop
                         handle_hide={this.handle_hide}
                         handle_delete={() => {
                             this.handle_delete(data.id);

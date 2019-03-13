@@ -24,10 +24,14 @@ const comments_reducer = (state, action) => {
                 select_search: ''
             };
         case HANDLE_ERROR:
-            return {
+            delete state.modal;
+            delete state.modal_type;
+            console.log('HANDLE_ERROR', state)
+            const data = {
                 ...state,
-                error: 'false'
+                ...action.payload
             };
+            return data;
         case USER_INFO:
             return user_stroage(state, action.payload);
         default:

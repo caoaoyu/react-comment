@@ -48,13 +48,9 @@ export const timeToFormat = (before, time) => {
 const host = 'http://localhost:3000/';
 
 export const Get = (url_parms) => {
-    return fetch(`${host}${url_parms}`)
-        .then((res) => {
-            return server_error(res.json());
-        })
-        .catch((error) => {
-            throw new Error(error);
-        });
+    return fetch(`${host}${url_parms}`).then((res) => {
+        return server_error(res.json());
+    });
 };
 
 export const Post = (url_parms, body) => {
@@ -69,9 +65,6 @@ export const Post = (url_parms, body) => {
         .then((res) => {
             return server_error(res.json());
         })
-        .catch((error) => {
-            throw new Error(error);
-        });
 };
 
 export const Delete = (url_parms, body) => {
@@ -82,17 +75,13 @@ export const Delete = (url_parms, body) => {
             'Content-Type': 'application/json;charset=utf-8'
         }
     };
-    return fetch(`${host}${url_parms}`, parms)
-        .then((res) => {
-            return server_error(res.json());
-        })
-        .catch((error) => {
-            throw new Error(error);
-        });
+    return fetch(`${host}${url_parms}`, parms).then((res) => {
+        return server_error(res.json());
+    });
 };
 export const server_error = (active) => {
     return active.then((datas) => {
-        if (datas.error) throw new Error(datas);
+        if (datas.error) throw new Error(datas.error);
         return datas;
     });
 };

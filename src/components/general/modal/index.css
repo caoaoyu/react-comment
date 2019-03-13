@@ -5,39 +5,84 @@
     justify-content: center;
     align-items: center;
     flex-flow: column;
-    width: 100px;
+    width: 100%;
+    height: 100%;
     position: absolute;
     right: 0;
-    bottom: -58px;
-    font-size: 12px;
     border-radius: 5px;
     background-color: #b4afafa2;
     z-index: 1024;
 }
 
-.modal_context{
-width: 100%;
+.modal_mask {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.65);
+    filter: alpha(opacity=50);
+}
+
+.modal_warp {
+    position: relative;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 0;
+    border-radius: 4px;
+    width: 400px;
+    min-height: 218px;
+    overflow: hidden;
+    transform-origin: 171px 285px;
+    z-index: 3;
+    -webkit-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.modal_header, .none_header {
+    padding: 16px 24px;
+    color: rgba(0, 0, 0, 0.65);
+    background: #fff;
+    border-radius: 4px 4px 0 0;
+}
+
+.modal_header {
+    border-bottom: 1px solid #e8e8e8;
+
+}
+
+.modal_body {
+    padding: 24px;
+    font-size: 16px;
+    line-height: 1.5;
     text-align: center;
-    padding: 0px;
-    margin: 5px;
+    word-wrap: break-word;
 }
 
-.operating_sure {
-    margin: 0 5px 0 5px;
-    color: #eeeaea !important;
+.modal_footer {
+    padding: 10px 16px;
+    text-align: right;
+    border-top: 1px solid #e8e8e8;
+    border-radius: 0 0 4px 4px;
+}
+
+.modal_hide {
+    display: none;
+}
+
+.modal_footer div {
+    color: #eeeaea;
     border-radius: 3px;
+    width: 50px;
+    margin: auto;
+    padding: 5px 15px;
+}
+.modal_sure {
+    background-color: rgb(11, 156, 240);
 }
 
-.operating_close {
-    color: #2da25f;
-    margin: 0 5px 0 5px;
-    border-radius: 3px;
-}
-
-.operation {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 10px;
+.modal_close {
+    background-color: #2da25f;
 }

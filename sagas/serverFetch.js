@@ -7,9 +7,16 @@ export const fetch_user = (action, state) => {
         password: action.payload.cookie ? action.payload.password : md5(action.payload.password)
     };
 
-    return util.Post('comments/login', cond).then((res) => {
-        return res;
-    });
+    return util.Post('comments/login', cond).then((res) => res);
+};
+export const fetch_registered = (action, state) => {
+    const cond = {
+        account: action.payload.account,
+        password: md5(action.payload.password),
+        sex: action.payload.sex || 0,
+        time: new Date().getTime()
+    };
+    return util.Post('comments/registered', cond).then((res) => res);
 };
 
 export const fetch_comments = (action, state) => {
@@ -47,7 +54,7 @@ export const update_comments = (payload, state) => {
 export const reply_comment = (payload, state) => {
     const cond = {
         id: payload.id,
-        reply: JSON.stringify(payload.reply),
+        reply: JSON.stringify(payload.reply)
     };
     return util.Post('comments/reply', cond).then((active) => active);
 };
