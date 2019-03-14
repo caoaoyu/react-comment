@@ -35,10 +35,10 @@ export const fetch_comments = (action, state) => {
     });
 };
 
-export const add_comment = (payload) => {
+export const add_comment = (payload, state) => {
     let replace_text = payload.text.replace(/\r\n/g, '<br/>');
     let create_time = new Date().getTime().toString();
-    let comment = { context: replace_text, state: 1, create_time, id: payload.id };
+    let comment = { context: replace_text, state: 1, create_time, id: state.user.uid };
     return util.Post('comments/add', comment).then((active) => active);
 };
 

@@ -56,8 +56,8 @@ router.post('/login', (req, res) => {
 router.post('/registered', (req, res) => {
     const { account, password, sex, time } = req.body;
     const uid = md5(account, password, time);
-    const s1 = `INSERT INTO user(account, password, sex, createTime, uid)
-    VALUES('${account}', '${password}', ${sex}, ${time}, '${uid}')`;
+    const s1 = `INSERT INTO user(name, account, password, sex, createTime, uid)
+    VALUES('${account}', '${account}', '${password}', ${sex}, ${time}, '${uid}')`;
     const s2 = `SELECT * FROM user WHERE account = ${account}`;
     connection.query(s2, (err, info) => {
         if (info) {
@@ -130,9 +130,9 @@ router.post('/reply', (req, res) => {
 router.post('/add', (req, res) => {
     const { state, context, create_time, id } = req.body;
     if (!state || !context || !create_time) return res.json({ error: true, msg: '缺少传递值' });
-    if (!id) return res.json({ error: '缺少用户信息' });
+    if (!id) return res.json({ error: true, msg: '缺少用户信息' });
 
-    const addSql = `INSERT INTO message(state,context,create_time, uid) VALUES(${state}, '${context}', ${create_time}, ${id})`;
+    const addSql = `INSERT INTO message(state,context,create_time, uid) VALUES(${state}, '${context}', ${create_time}, '${id}')`;
     connection.query(addSql, (err) => {
         err ? res.json({ error: true, msg: '服务器错误' }) : res.json({ success: true });
         if (err) console.log('[INSERT ERROR] - ', err.message);

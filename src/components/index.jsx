@@ -7,13 +7,18 @@ import SettingPages from '../container/settingPages';
 import SelectComment from '../container/selectContainer';
 import Search from '../components/search/index';
 import './index.css';
+import Modal from './general/modal';
 class App extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            visible: false
+        };
+        this.handle_hide = this.handle_hide.bind(this);
     }
 
     componentWillMount() {
-        if(!this.props.user.account) {
+        if (!this.props.user.account) {
             this.props.history.push('/');
         }
     }
@@ -22,7 +27,23 @@ class App extends React.Component {
         this.props.fetch_comments();
     }
 
+    componentWillReceiveProps(nextProps) {
+        console.log('---------', nextProps);
+        if (nextProps.modal) {
+            this.setState({
+                visible: true
+            });
+        }
+    }
+    handle_hide() {
+        this.setState({
+            visible: false
+        });
+        this.props.handle_error();
+    }
+
     render() {
+        const { modal } = this.props;
         return (
             <div className="container">
                 <Search />
@@ -30,6 +51,15 @@ class App extends React.Component {
                 <SelectComment />
                 <VisibleComments />
                 <SettingPages />
+                <Modal
+                    visible={this.state.visible}
+                    handle_hide={() => {
+                        this.handle_hide();
+                    }}
+                    context={modal ? modal.context : false}
+                    title={modal ? modal.title : false}
+                    btn={modal ? modal.btn : []}
+                />
             </div>
         );
     }

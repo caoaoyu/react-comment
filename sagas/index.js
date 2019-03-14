@@ -18,8 +18,8 @@ function* fetch_user(action) {
         const payload = yield call(() => Api.fetch_user(action, state));
         yield put({ type: 'USER_INFO', payload });
     } catch (e) {
-        console.log(e)
-        console.log(err_modal('login', e))
+        console.log(e);
+        console.log(err_modal('login', e));
         yield put({
             type: 'FETCH_ACTION',
             payload: err_modal('login', e)
@@ -52,8 +52,9 @@ function* fetch_comments(action) {
 }
 
 function* add_comments(action) {
+    const state = yield select();
     try {
-        const payload = yield call(() => Api.add_comment(action.payload));
+        const payload = yield call(() => Api.add_comment(action.payload, state));
         yield put({ type: 'FETCH_COMMENT', payload });
     } catch (e) {
         yield put({ type: 'FETCH_ACTION', payload: err_modal('add', e) });

@@ -34,7 +34,7 @@ class Login extends React.Component {
 
     // 初始缓存登录
     componentDidMount() {
-        if (this.state.account != undefined && this.state.password != undefined) {
+        if (this.state.account.length > 1 && this.state.password.length > 1) {
             this.props.fetch_user({
                 account: this.state.account,
                 password: this.state.password,
